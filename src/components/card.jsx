@@ -1,77 +1,123 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function Card(props) {
 
-    console.log(convertKelvinToCelsius(300));
-    
-    return (
-        <div>
-            <div class="card weather-card">
-                <div>
-                    <div class="container text-center">
-                        <div class="row mt-5">
-                            <div class="col-sm-6">
-                                <h3>Colombo, Sri Lanka</h3>
-                                <h5>Time</h5>
-                                <img src="" alt="weather-icon"/>
-                                    <span>Rain</span>
+    const apiKey = "9a2f57a94f70ed16f3511c1d48f83e33";
 
-                            </div>
-                            <div class="col-sm-6">
-                                <h2>80K &#8451;</h2>
-                                <h6>Temp Min : 50K</h6>
-                                <h6>Temp Max : 60K &#8451;</h6>
-                            </div>
-                        </div>
-                    </div>
+    const [weatherData, setWeatherData] = useState(null);
+
+    useEffect(() => {
+      // Make an API request to OpenWeather API using the city code
+
+      fetch(`https://api.openweathermap.org/data/2.5/weather?id=${props.city}&appid=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+          setWeatherData(data);
+        })
+        .catch(error => {
+          console.error("Error fetching weather data:", error);
+        });
+    }, []);
+  
+    const timeFormat = () => {
+      // Implement your own time formatting logic here
+    };
+  
+    if (!weatherData) {
+      return <div>Loading...</div>;
+    }
+  
+    const city = weatherData.name;
+    
+    const temperature = convertKelvinToCelsius(weatherData.main.temp);
+    
+    const minTemperature = convertKelvinToCelsius(weatherData.main.temp_min);
+    
+    const maxTemperature = convertKelvinToCelsius(weatherData.main.temp_max);
+    
+    const pressure = weatherData.main.pressure;
+    
+    const humidity = weatherData.main.humidity;
+    
+    const visibility = weatherData.visibility;
+    
+    const windSpeed = weatherData.wind.speed;
+    
+    const sunrise = new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString();
+    
+    const sunset = new Date(weatherData.sys.sunset * 1000).toLocaleTimeString();
+    
+    const weatherDescription = weatherData.weather[0].description;
+    
+    const weatherIcon = weatherData.weather[0].icon;
+
+    const time = timeFormate();
+
+    const randomColor = RandomColor();
+
+    // add custom css scripts
+    const myStyles = {
+      background: `url(../images/1.png) no-repeat, ${randomColor}`,
+
+      backgroundSize: 'cover, auto',
+    
+      borderRadius: '10px',
+    };
+
+    const cardBottom = {
+      
+      backgroundColor: '#303030',
+      
+      borderRadius: '10px',
+    };
+
+    return (
+      <div>
+        <div className="card weather-card" style={myStyles}>
+          <div>
+            <div className="container text-center">
+              <div className="row mt-5">
+                <div className="col-sm-6">
+                  <h3>{city}</h3>
+                  <h5>{ time }</h5>
+                  <img src={`http://openweathermap.org/img/w/${weatherIcon}.png`} alt="weather-icon" />
+                  <span>{weatherDescription}</span>
                 </div>
-                <div class="card-body">
-                    <div class="container text-center">
-                        <div class="row">
-                            <div class="col-sm-4 border-end">
-                                <h6>Pressure: 120 Hpa</h6>
-                                <h6>Humidity: 80%</h6>
-                                <h6>Visibility: 4.2Km</h6>
-                            </div>
-                            <div class="col-sm-4 border-end">
-                                <i class="bi bi-arrow-up-right-circle-fill"></i>
-                                <h5>Wind: 3.4 m/s</h5>
-                            </div>
-                            <div class="col-sm-4">
-                                <h6>Sunrise: 5.20 a.m</h6>
-                                <h6>Sunset: 6.30 p.m</h6>
-                            </div>
-                        </div>
-                    </div>
+                <div className="col-sm-6">
+                  <h2>{temperature} &#8451;</h2>
+                  <h6>Temp Min: {minTemperature} &#8451;</h6>
+                  <h6>Temp Max: {maxTemperature} &#8451;</h6>
                 </div>
+              </div>
             </div>
+          </div>
+          <div className="card-body" style={cardBottom}>
+            <div className="container text-center">
+              <div className="row">
+                <div className="col-sm-4 border-end">
+                  <h6>Pressure: {pressure} Hpa</h6>
+                  <h6>Humidity: {humidity}%</h6>
+                  <h6>Visibility: {visibility}Km</h6>
+                </div>
+                <div className="col-sm-4 border-end">
+                  <i className="bi bi-arrow-up-right-circle-fill"></i>
+                  <h5>Wind: {windSpeed} m/s</h5>
+                </div>
+                <div className="col-sm-4">
+                  <h6>Sunrise: {sunrise}</h6>
+                  <h6>Sunset: {sunset}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    )
+      </div>
+    );
 }
 
 export default Card;
 
-// FetchWeather data function fetch weather data from openweather API
-function fetchWeatherData(cityCode) {
-
-    const apiKey = "9a2f57a94f70ed16f3511c1d48f83e33";
-
-    const url = `http://api.openweathermap.org/data/2.5/weather?id=${cityCode}&appid=${apiKey}`;
-
-    return fetch(url)
-        .then(response => {
-
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error(`Request failed with status code ${response.status}.`);
-            }
-        })
-        .catch(error => {
-            console.log(`An error occurred: ${error}`);
-        });
-}
-
+  
 // Helper function to convert temperature from Kelvin to Celsius
 
 function convertKelvinToCelsius(kelvin) {
@@ -121,4 +167,33 @@ function timeFormate() {
     const data = currentTime + ", " + monthName + " " + date;
 
     return data;
+}
+
+// That function responsible for change background color
+function RandomColor(){
+
+  let colors = [
+    "#388EE7",
+    "#8B49CC",
+    "#3C882C",
+    "#C63F3F",
+    "#6249CC",
+    "#1B127B",
+    "#D847DB",
+    "#138E78",
+    "#FF5733",
+    "#66CC99",
+    "#E74C3C",
+    "#F39C12",
+    "#3498DB",
+    "#9B59B6",
+    "#27AE60",
+    "#F1C40F"
+  ];
+
+  const randomIndex = Math.floor(Math.random() * colors.length);
+
+  const randomColor = colors[randomIndex];
+
+  return randomColor;
 }
