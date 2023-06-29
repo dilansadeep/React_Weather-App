@@ -2,7 +2,7 @@
 
 The Weather Dashboard is a web application that allows users to get the current weather information for different cities using the OpenWeatherMap API. It provides real-time weather data such as temperature, weather conditions, and more.
 
-![Weather Dashboard Screenshot](https://github.com/Deshan555/React_Weather-App/blob/master/ReactApp.png)
+![Weather Dashboard Screenshot](https://github.com/Deshan555/React_Weather-App/blob/master/ReactWeather.png)
 
 ## Technologies Used
 
