@@ -1,6 +1,72 @@
-# Getting Started with Create React App
+# React Weather Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Weather Dashboard is a web application that allows users to get the current weather information for different cities using the OpenWeatherMap API. It provides real-time weather data such as temperature, weather conditions, and more.
+
+![Weather Dashboard Screenshot](https://github.com/Deshan555/React_Weather-App/blob/master/ReactWeather.png)
+
+## Technologies Used
+
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+- ReactJS
+
+## Setup and Usage
+
+1. Clone the repository or download the source code.
+
+```bash
+git clone https://github.com/Deshan555/React_Weather-App.git
+```
+
+2. Open the project folder.
+
+```bash
+cd react_weather_application
+```
+
+3. To Run the project, use `npm start`
+
+4. All weather details Update every 5 minutes.
+
+## Configuration
+
+To use the Weather App, you need an API key from OpenWeatherMap. Follow the steps below to obtain an API key:
+
+1. Go to the [OpenWeatherMap website](https://openweathermap.org/) and sign up for a free account.
+
+2. After signing up and logging in, go to your account dashboard and navigate to the "API Keys" section.
+
+3. Generate a new API key.
+
+4. Copy the API key and replace the placeholder value in the `function.js` file with your own API key:
+
+```javascript
+const apiKey = 'YOUR_API_KEY';
+```
+
+## Completed Tasks
+
+- [x] Extract City codes from cities.json file and load it into an array.
+- [x] Referencing the City Codes, you now have to call openweathermap.org RESTful APIs
+to get the latest weather information from the servers. First, you may need to register with
+the openweathermap.org to access the APIs
+- [x]  create a UI as of the provided
+design file (PSD). This UI should be implemented with a responsive layout that adjusts into both
+desktop and mobile resolutions
+- [x]  Implement a data caching mechanism in your application by storing data coming from
+openweathermap.org and serving it when the user requests the same data in subsequent
+requests. Caching of a particular data should expire in 5 minutes
+- [ ] create a docker file to deploy your application with
+all required services
+
+
+## Credits
+
+- [OpenWeatherMap API](https://openweathermap.org/) - Used for retrieving weather data.
+- [Bootstrap](https://getbootstrap.com/) - Used for styling the user interface.
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
