@@ -18,11 +18,7 @@ function Card(props) {
           console.error("Error fetching weather data:", error);
         });
     }, []);
-  
-    const timeFormat = () => {
-      // Implement your own time formatting logic here
-    };
-  
+    
     if (!weatherData) {
       return <div>Loading...</div>;
     }
