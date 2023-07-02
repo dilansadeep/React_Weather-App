@@ -40,7 +40,7 @@ To use the Weather App, you need an API key from OpenWeatherMap. Follow the step
 
 3. Generate a new API key.
 
-4. Copy the API key and replace the placeholder value in the `function.js` file with your own API key:
+4. Copy the API key and replace `.env` file with your own API key:
 
 ```javascript
 const apiKey = 'YOUR_API_KEY';
@@ -61,6 +61,23 @@ requests. Caching of a particular data should expire in 5 minutes
 - [ ] create a docker file to deploy your application with
 all required services
 
+## Requested Changes 
+
+- [x] Consider the folder grouping for better understanding.
+
+- [x] Need to use .env file or appSetting.json file for store API keys and environment variables.
+
+- [x] Need to move Constant variable to separate Constant file. 
+
+- [x] Need to define an API url separate module like APIHelper.
+
+- [x] Remove inline styles.
+
+- [x] Implement UI as we provide.
+
+- [x] Remove duplicate API requests.
+
+- [x] Need to implement UI responsiveness.
 
 ## Credits
 
