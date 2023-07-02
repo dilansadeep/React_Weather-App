@@ -61,7 +61,6 @@ function SingleCard(props) {
 
     return (
 
-
         <div>
             <div id="cards" className="d-flex justify-content-center">
 

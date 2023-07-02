@@ -27,7 +27,7 @@ function Finder(props) {
                         type="button"
                         id="search_button"
                         style= {searchStyle}
-                        class="btn"
+                        class="btn text-light"
                     >
                         Add City
                     </button>
