@@ -1,29 +1,25 @@
 import React from 'react';
 
-import Header from './components/header';
+import Home from './components/pages/Home';
 
-import Footer from './components/footer';
+import WeatherData from './components/pages/WeatherCard';
 
-import Weather from './components/weather';
-
-import Finder from './components/finder';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
 
-function App(){
+const App = () => {
 
-  return (
-    <div>
-      <Header />
+    return(
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-      <Finder />
-
-      <Weather />
-      
-      <Footer />
-    </div>
-  )
-}
+        <Route path="/weather/:cityCode" element={<WeatherData />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default App;
